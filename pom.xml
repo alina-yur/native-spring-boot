@@ -34,6 +34,11 @@
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
+					<configuration>
+          				<metadataRepository>
+            				<enabled>true</enabled>
+          				</metadataRepository>
+       				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -79,5 +84,4 @@
         </build>
     </profile>
 	</profiles>
-
 </project>
