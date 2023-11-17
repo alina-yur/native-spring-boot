@@ -20,4 +20,11 @@ jobs:
       - name: Build and run a native Spring app
         run: |
           mvn -Pnative native:compile
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: demo-${{ matrix.os }}
+          path: |
+            target
       
