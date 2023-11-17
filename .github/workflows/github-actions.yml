@@ -24,7 +24,6 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: demo-${{ matrix.os }}
+          name: demo
           path: |
             target
-      
