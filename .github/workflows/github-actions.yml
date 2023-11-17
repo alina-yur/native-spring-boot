@@ -26,4 +26,4 @@ jobs:
         with:
           name: demo-${{ matrix.os }}
           path: |
-            target
+            target/demo
