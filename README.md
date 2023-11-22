@@ -1,13 +1,18 @@
-# Build a plain Native Image app
+# Build a Native Spring Application
 
 ```mvn -Pnative native:compile```
 
 It's a standard native compilation command that would work on any Spring Boot app with GraalVM Native Image support enabled as a dependency.
 
+# Spring Boot AOT engine and GraalVM
+
+# Dev Mode
+
+`-Ob`
 
 # Optimize performance
 
-## PGO
+## PGO 🚀
 
 One of the most powerful performance optimizations in Native Image is profile-guided optimizations (PGO).
 
@@ -28,7 +33,7 @@ after you shut down the app, you'll see an `iprof` file in your working director
 ```mvn -Poptimized native:compile```
 
 
-## ML-enabled PGO
+## ML-enabled PGO 👩‍🔬
 
 The PGO approach described above, where the profiles are customly collected and tailored for your app, is the recommended way to do PGO in Native Image. 
 
@@ -37,8 +42,7 @@ There can be situations though when collecting profiles is not possible – for 
 If you are curious about the impact if this optimization, you can disable it with `-H:-MLProfileInference`. In our measurements, this optimization provides ~6% runtime performance improvement, which is pretty cool for an optimization you automatically get out of the box.
 
 
-
-## G1 GC
+## G1 GC 🧹
 
 There could be different GC strategies. The default GC in Native Image, Serial GC, can be beneficial in certain scenarios, for example if you have a short-lived application or want to optimize memory usage. 
 
@@ -46,8 +50,7 @@ If you are aiming for the best peak throughput, our general recommendation is to
 
 In our `optimized` profile it's enabled via `<buildArg>--gc=G1</buildArg>`.
 
-## Optimization levels in Native Image
+## Optimization levels in Native Image 
 
-# Dev Mode
 
-`-Ob`
+## Monitoring 📈
