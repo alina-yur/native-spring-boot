@@ -8,7 +8,23 @@ It's a standard native compilation command that would work on any Spring Boot ap
 
 # Dev Mode
 
-`-Ob`
+For development purproses, you can speed up native builds by passing the `-Ob` flag: either via the command line, or in the Native Maven plugin:
+
+```
+<plugin>
+  <groupId>org.graalvm.buildtools</groupId>
+      <artifactId>native-maven-plugin</artifactId>
+          <configuration>
+              <buildArgs>
+                  <buildArg>--pgo-instrument</buildArg>
+              </buildArgs>
+            </configuration>
+</plugin>
+```
+
+This will speed up the compilation phase, and therefore the overall build time will be ~15-20% faster.
+
+This is intended as a dev mode, make sure to remove the flag before deploying to production to get the best production.
 
 # Optimize performance
 
