@@ -16,7 +16,7 @@ For development purproses, you can speed up native builds by passing the `-Ob` f
       <artifactId>native-maven-plugin</artifactId>
           <configuration>
               <buildArgs>
-                  <buildArg>--pgo-instrument</buildArg>
+                  <buildArg>-Ob</buildArg>
               </buildArgs>
             </configuration>
 </plugin>
