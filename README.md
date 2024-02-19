@@ -24,7 +24,7 @@ For development purproses, you can speed up native builds by passing the `-Ob` f
 
 This will speed up the compilation phase, and therefore the overall build time will be ~15-20% faster.
 
-This is intended as a dev mode, make sure to remove the flag before deploying to production to get the best production.
+This is intended as a dev mode, make sure to remove the flag before deploying to production to get the best performance.
 
 # Optimize performance
 
