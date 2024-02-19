@@ -66,7 +66,21 @@ If you are aiming for the best peak throughput, our general recommendation is to
 
 In our `optimized` profile it's enabled via `<buildArg>--gc=G1</buildArg>`.
 
-## Optimization levels in Native Image 
+## Optimization levels in Native Image
+
+There are several levels of optimizations in Native Image, that can be set at build time:
+
+- `-O0` - No optimizations: Recommended optimization level for debugging native images;
+
+- `-O1` - Basic optimizations: Basic GraalVM compiler optimizations, still works for debugging;
+ 
+- `-O2`  - Advanced optimizations: default optimization level for Native Image;
+
+- `-O3` - All optimizations for best performance;
+
+- `-Ob` - Optimize for fastest build time: use only for dev purposes for faster feedback, remove before compiling for deployment;
+
+- `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
 
 ## Monitoring 📈
