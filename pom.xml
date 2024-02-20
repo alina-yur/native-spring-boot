@@ -100,7 +100,7 @@
               <buildArgs>
                 <buildArg>--gc=G1</buildArg>
                 <buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
-			<buildArg>-march=native</buildArg>
+				<buildArg>-march=native</buildArg>
               </buildArgs>
               </configuration>
             </plugin>

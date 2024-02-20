@@ -8,7 +8,7 @@ It's a standard native compilation command that would work on any Spring Boot ap
 
 # Dev Mode
 
-For development purproses, you can speed up native builds by passing the `-Ob` flag: either via the command line, or in the Native Maven plugin:
+For development purposes, you can speed up native builds by passing the `-Ob` flag: either via the command line, or in the Native Maven plugin:
 
 ```
 <plugin>
@@ -82,5 +82,17 @@ There are several levels of optimizations in Native Image, that can be set at bu
 
 - `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
+
+## Testing 🧪
+
+GraalVM's Native Build Tools support testing applications as native images, including JUnit support. The way this works is that your tests are compiled as native executables to verify that things work in the native world as expected. Test our application with the following:
+
+ ```mvn -PnativeTest test```
+
+`HttpRequestTest` will verify that our application returns the expected message.
+
+Native testing recommendation: you don't need to test in the mode all the time, especially if you are working with frameworks and libraries that support Native Image – usually everything just works. Develop and test your application on the JVM, and test in Native once in a while, as a part of your CI/CD process, or if you are introducing a new dependency, or changing things that are sensitive for Native Image (reflection etc). 
+
+## Using libraries
 
 ## Monitoring 📈
