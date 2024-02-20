@@ -10,7 +10,7 @@ It's a standard native compilation command that would work on any Spring Boot ap
 
 For development purposes, you can speed up native builds by passing the `-Ob` flag: either via the command line, or in the Native Maven plugin:
 
-```
+```xml
 <plugin>
   <groupId>org.graalvm.buildtools</groupId>
       <artifactId>native-maven-plugin</artifactId>
@@ -58,7 +58,7 @@ There can be situations though when collecting profiles is not possible – for 
 If you are curious about the impact if this optimization, you can disable it with `-H:-MLProfileInference`. In our measurements, this optimization provides ~6% runtime performance improvement, which is pretty cool for an optimization you automatically get out of the box.
 
 
-## G1 GC 🧹
+### G1 GC 🧹
 
 There could be different GC strategies. The default GC in Native Image, Serial GC, can be beneficial in certain scenarios, for example if you have a short-lived application or want to optimize memory usage. 
 
@@ -83,7 +83,7 @@ There are several levels of optimizations in Native Image, that can be set at bu
 - `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
 
-## Testing 🧪
+# Testing 🧪
 
 GraalVM's Native Build Tools support testing applications as native images, including JUnit support. The way this works is that your tests are compiled as native executables to verify that things work in the native world as expected. Test our application with the following:
 
@@ -93,6 +93,6 @@ GraalVM's Native Build Tools support testing applications as native images, incl
 
 Native testing recommendation: you don't need to test in the mode all the time, especially if you are working with frameworks and libraries that support Native Image – usually everything just works. Develop and test your application on the JVM, and test in Native once in a while, as a part of your CI/CD process, or if you are introducing a new dependency, or changing things that are sensitive for Native Image (reflection etc). 
 
-## Using libraries
+# Using libraries
 
-## Monitoring 📈
+# Monitoring 📈
