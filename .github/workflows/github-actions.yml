@@ -19,7 +19,7 @@ jobs:
 
       - name: Build and run a Spring Native app
         run: |
-          mvn -Pnative native:compile
+          mvn --no-transfer-progress -Pnative native:compile
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
