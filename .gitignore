@@ -9,6 +9,7 @@ set_command.sh
 psrecord.py
 default.iprof
 .DS_Store
+demo-monitored.hprof
 
 
 ### STS ###

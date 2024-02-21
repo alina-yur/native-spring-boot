@@ -58,7 +58,7 @@ There can be situations though when collecting profiles is not possible – for 
 If you are curious about the impact if this optimization, you can disable it with `-H:-MLProfileInference`. In our measurements, this optimization provides ~6% runtime performance improvement, which is pretty cool for an optimization you automatically get out of the box.
 
 
-### G1 GC 🧹
+## G1 GC 🧹
 
 There could be different GC strategies. The default GC in Native Image, Serial GC, can be beneficial in certain scenarios, for example if you have a short-lived application or want to optimize memory usage. 
 

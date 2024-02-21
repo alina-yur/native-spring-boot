@@ -34,19 +34,15 @@
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.graalvm.buildtools</groupId>
-				<artifactId>native-maven-plugin</artifactId>
 					<configuration>
           				<metadataRepository>
             				<enabled>true</enabled>
           				</metadataRepository>
        				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
@@ -98,9 +94,29 @@
               <configuration>
               <imageName>demo-optimized</imageName>
               <buildArgs>
-                <buildArg>--gc=G1</buildArg>
+			    <!-- <buildArg>- -gc=G1</buildArg> -->
                 <buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
 				<buildArg>-march=native</buildArg>
+              </buildArgs>
+              </configuration>
+            </plugin>
+          </plugins>
+        </build>
+    </profile>
+		<profile>
+      <id>monitored</id>
+      <build>
+          <plugins>
+            <plugin>
+              <groupId>org.graalvm.buildtools</groupId>
+              <artifactId>native-maven-plugin</artifactId>
+              <configuration>
+              <imageName>demo-monitored</imageName>
+              <buildArgs>
+			  	<!-- <buildArg>- -gc=G1</buildArg> -->
+                <buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
+				<buildArg>-march=native</buildArg>
+				<buildArg>--enable-monitoring=heapdump,jfr,jvmstat</buildArg>
               </buildArgs>
               </configuration>
             </plugin>
