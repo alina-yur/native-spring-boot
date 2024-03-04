@@ -123,5 +123,24 @@
           </plugins>
         </build>
     </profile>
+	<profile>
+      <id>report</id>
+      <build>
+          <plugins>
+            <plugin>
+              <groupId>org.graalvm.buildtools</groupId>
+              <artifactId>native-maven-plugin</artifactId>
+              <configuration>
+              <imageName>demo-report</imageName>
+              <buildArgs>
+				<buildArg>--pgo</buildArg>
+			  	<buildArg>-H:+BuildReport</buildArg>
+				<buildArg>-H:+BuildReportSamplerFlamegraph</buildArg>
+              </buildArgs>
+              </configuration>
+            </plugin>
+          </plugins>
+        </build>
+    </profile>
 	</profiles>
 </project>
