@@ -4,7 +4,20 @@
 
 It's a standard native compilation command that would work on any Spring Boot app with GraalVM Native Image support enabled as a dependency.
 
-# Spring Boot AOT engine and GraalVM
+# Spring Boot AOT Engine and GraalVM
+
+By default, at runtime Spring pulls your app configuration from different sources, and creates an internal representation of your app. What's interesting, GraalVM Native Image does a similar thing – analyzes input and creates an internal representation of your app – but at build time. The Spring AOT engine bridges this gap between two worlds. It does two things: one is transforming your app configuration into native-friendly functional configuration. It also generates three kinds of input for Native Image:
+
+* Java source code (functional configuration)
+* Bytecode for things like dynamic proxies
+* Runtime hints for dynamic Java features (reflection, resources, etc). 
+
+Note. If messed up your application build process and you're hitting `Error: Please specify class (or /) containing the main entry point method` (shouldn't happen normally), it can ve solved by triggering the AOT processing step manually:
+
+```shell
+mvn clean compile spring-boot:process-aot package
+```
+
 
 # Dev Mode
 
