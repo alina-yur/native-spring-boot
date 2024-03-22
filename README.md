@@ -47,7 +47,7 @@ One of the most powerful performance optimizations in Native Image is profile-gu
 
 1. Build an instrumented image: 
 
-```mvn -Pinstrumented native:compile```
+```mvn -Pnative,instrumented native:compile```
 
 2. Run the app and apply relevant workload:
 
@@ -59,7 +59,7 @@ after you shut down the app, you'll see an `iprof` file in your working director
 
 3. Build an app with profiles (they are being picked up via `<buildArg>--pgo=${project.basedir}/default.iprof</buildArg>`):
 
-```mvn -Poptimized native:compile```
+```mvn -Pnative,optimized native:compile```
 
 
 ## ML-enabled PGO 👩‍🔬
