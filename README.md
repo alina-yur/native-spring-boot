@@ -12,12 +12,6 @@ By default, at runtime Spring pulls your app configuration from different source
 * Bytecode for things like dynamic proxies
 * Runtime hints for dynamic Java features (reflection, resources, etc). 
 
-Note. If messed up your application build process and you're hitting `Error: Please specify class (or /) containing the main entry point method` (shouldn't happen normally), it can ve solved by triggering the AOT processing step manually:
-
-```shell
-mvn clean compile spring-boot:process-aot package
-```
-
 
 # Dev Mode
 
