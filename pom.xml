@@ -38,6 +38,9 @@
           				<metadataRepository>
             				<enabled>true</enabled>
           				</metadataRepository>
+						<buildArgs>
+							<buildArg>-Ob</buildArg>
+						</buildArgs>
        				</configuration>
 			</plugin>
 			<plugin>
