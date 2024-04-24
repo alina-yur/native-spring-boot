@@ -107,9 +107,32 @@ When using libraries in native mode, some things such as reflection, resources, 
 * Ideally, a library would include the necessary config files. Example: [H2](https://github.com/h2database/h2database/blob/master/h2/src/main/META-INF/native-image/reflect-config.json), [OCI Java SDK](https://github.com/oracle/oci-java-sdk/blob/master/bmc-adm/src/main/resources/META-INF/native-image/com.oracle.oci.sdk/oci-java-sdk-adm/reflect-config.json). In this case no further action needed from a user – things just work.
 * In cases when a library doesn't (yet) support GraalVM, the next best option is having configuration for it in the [GraalVM Reachability Metadata Repository](https://github.com/oracle/graalvm-reachability-metadata). It's a centralized repository where both maintainers and users can contribute and then reuse configuration for Native Image. It's integrated into [Native Build Tools](https://github.com/graalvm/native-build-tools) and now enabled by default, so as a user, again things just work.<br>
 For both of those options, a quick way to asses whether your dependencies work with Native Image is the ["Ready for Native Image"](https://www.graalvm.org/native-image/libraries-and-frameworks/) page. Note that this is a list of libraries that are *known* to be continuously testing with Native Image, and there are more compatible libraries out there; but this is a good first step for assessment. 
-* Add about the tracing agent
+* You can use framework support to produce custom “hints” for Native Image:
+```java
+runtimeHints.resources().registerPattern(“config/app.properties”); //register a resource
+```
+```java
+@Reflective //flag elements that require reflection
+```
+* You can use the Tracing Agent to produce the necessary config [automatically](https://www.graalvm.org/latest/reference-manual/native-image/metadata/AutomaticMetadataCollection/).
+* You can provide/extend config for reflection, JNI, resources, serialization, and predefined classes [manually in JSON](graalvm.org/latest/reference-manual/native-image/metadata/#specifying-metadata-with-json).
 
 
 # Configuring reflection, resources, proxies
+
+There is a way to automatically generate configuration files for Native Image. In our example, we have `ReflectionController`, which accesses a field in a different class at runtime, and `ResourceController`, which is reading `message.xml` at runtime. To make those calls visible and automatically resolved by Native Image, run the tracing agent:
+
+```shell
+java -agentlib:native-image-agent=config-output-dir=./resources/META-INF/native-image  -jar ./target/demo-0.0.1-SNAPSHOT.jar
+```
+
+As the app is running, access the corresponding endpoints (`http://localhost:8080/reflection`, `http://localhost:8080/resource`) to emulate relevant workload. The agent will observe those call, produce configuration files in `resources/META-INF/native-image`. As this is a known location, Native Image will pick up the config files automatically. Rebuild the app and access the endpoints to verify:
+
+```shell
+mvn -Pnative native:compile
+./target/demo
+http://localhost:8080/reflection
+http://localhost:8080/resource
+```
 
 # Monitoring 📈

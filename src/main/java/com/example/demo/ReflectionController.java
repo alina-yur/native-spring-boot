@@ -9,10 +9,9 @@ import java.util.stream.Collectors;
 @RestController
 public class ReflectionController {
 
-    @Reflective
     @GetMapping("/reflection")
     public String message() {
-        return getMessage();
+        return "getMessage()";
     }
 
     @Reflective
