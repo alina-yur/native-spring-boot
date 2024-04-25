@@ -11,7 +11,7 @@ public class ReflectionController {
 
     @GetMapping("/reflection")
     public String message() {
-        return "getMessage()";
+        return getMessage();
     }
 
     @Reflective

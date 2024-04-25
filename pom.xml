@@ -40,6 +40,7 @@
           				</metadataRepository>
 						<buildArgs>
 							<buildArg>-Ob</buildArg>
+							<buildArg>-H:ConfigurationFileDirectories=./resources/META-INF/native-image</buildArg>
 						</buildArgs>
        				</configuration>
 			</plugin>
