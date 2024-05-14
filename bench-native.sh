@@ -1,7 +1,7 @@
 set -e
 
 function print() {
-    printf "\033[1;34m$1\033[0m\n"
+    printf "\033[1;35m$1\033[0m\n"
 }
 
 print "Starting the native app 🚀"
@@ -14,11 +14,11 @@ sleep 2
 print "Done waiting for startup..."
 
 print "Executing warmup load"
-hey -n=250000 http://localhost:8080/hello
+hey -n=250000 -c=8 http://localhost:8080/hello
 
 print "Executing benchmark load"
-hey -n=250000 http://localhost:8080/hello
+hey -n=250000 -c=8 http://localhost:8080/hello
 
-print "Done!🎉"
+print "Native run done!🎉"
 kill $PID
 sleep 1
