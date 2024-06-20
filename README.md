@@ -144,4 +144,29 @@ mvn -Pmonitored native:compile
 ```
 This will trigger a profile with the following `buildArgs`: `--enable-monitoring=heapdump,jfr,jvmstat`. You can also opt for using just one of those monitoring features. 
 
-<!-- add Micrometer -->
+Let's start the app:
+
+```shell
+./target/demo-monitored
+```
+
+Now in another terminal tab let's start VisualVM (note that you can also `sdk install visualvm`, how cool is this!):
+
+```shell
+visualvm
+```
+
+And in a yet another terminal tab let's send some load to the app (get it [here](https://github.com/rakyll/hey)):
+
+```shell
+hey -n=100000 http://localhost:8080/hello
+```
+
+You'll see that our application successfully operates and uses minimal resources even under load. 
+
+You can go even further and repeat the experiment but limiting the memory to let's say ridiculous 10 MB and the app will remain operational:
+
+```shell
+./target/demo-monitored -Xmx=10M
+hey -n=100000 http://localhost:8080/hello
+```
