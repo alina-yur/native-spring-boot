@@ -117,7 +117,6 @@
               <configuration>
               <imageName>demo-monitored</imageName>
               <buildArgs>
-			  	<buildArg>--gc=G1</buildArg>
                 <buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
 				<buildArg>-march=native</buildArg>
 				<buildArg>--enable-monitoring=heapdump,jfr,jvmstat</buildArg>
