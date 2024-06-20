@@ -156,7 +156,7 @@ Now in another terminal tab let's start VisualVM (note that you can also `sdk in
 visualvm
 ```
 
-And in a yet another terminal tab let's send some load to the app (get it [here](https://github.com/rakyll/hey)):
+And in a yet another terminal tab let's send some load to the app via `hey` (get it [here](https://github.com/rakyll/hey)):
 
 ```shell
 hey -n=100000 http://localhost:8080/hello
