@@ -73,6 +73,10 @@ If you are aiming for the best peak throughput, our general recommendation is to
 
 In our `optimized` profile it's enabled via `<buildArg>--gc=G1</buildArg>`.
 
+## `-march=native`
+
+If you asre planning to run your executable on the same/similar machine you're building it on (rather than distributing it to your users etc), use this flag to instruct Native Image to leverage the specific hardware feature of your machine for additional performance. The opposite of this is the `march=compatibility` mode, which is best for distribution for unknown types of platforms.
+
 ## Optimization levels in Native Image
 
 There are several levels of optimizations in Native Image, that can be set at build time:
@@ -86,6 +90,8 @@ There are several levels of optimizations in Native Image, that can be set at bu
 - `-O3` - All optimizations for best performance;
 
 - `-Ob` - Optimize for fastest build time: use only for dev purposes for faster feedback, remove before compiling for deployment;
+
+- `-Os` - Optimize for image size;
 
 - `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
