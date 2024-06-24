@@ -173,6 +173,12 @@ You'll see that our application successfully operates and uses minimal resources
 You can go even further and repeat the experiment but limiting the memory to let's say ridiculous 10 MB and the app will remain operational:
 
 ```shell
-./target/demo-monitored -Xmx=10M
+./target/demo-monitored -Xmx10M
 hey -n=100000 http://localhost:8080/hello
 ```
+
+<div style="text-align: center;">
+    <img src="src/main/resources/static/monitoring-graalvm-native-applications.png" alt="Monitoring GraalVM native applications in VisualVM" style="width: 800px;">
+</div>
+
+<p style="text-align: center;">Monitoring GraalVM native applications in VisualVM</p>
