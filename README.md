@@ -141,6 +141,12 @@ http://localhost:8080/reflection
 http://localhost:8080/resource
 ```
 
+# Deploying 📦
+
+```
+mvn -Pnative spring-boot:build-image
+```
+
 # Monitoring 📈
 
 Build an application with monitoring features enabled:
