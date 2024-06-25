@@ -4,7 +4,7 @@
 
 It's a standard native compilation command that would work on any Spring Boot app with GraalVM Native Image support enabled as a dependency.
 
-# Spring Boot AOT Engine and GraalVM
+# 1. Spring Boot AOT Engine and GraalVM
 
 By default, at runtime Spring pulls your app configuration from different sources, and creates an internal representation of your app. What's interesting, GraalVM Native Image does a similar thing – analyzes input and creates an internal representation of your app – but at build time. The Spring AOT engine bridges this gap between two worlds. It does two things: one is transforming your app configuration into native-friendly functional configuration. It also generates three kinds of input for Native Image:
 
@@ -13,7 +13,7 @@ By default, at runtime Spring pulls your app configuration from different source
 * Runtime hints for dynamic Java features (reflection, resources, etc). 
 
 
-# Dev Mode
+## Dev Mode
 
 For development purposes, you can speed up native builds by passing the `-Ob` flag: either via the command line, or in the Native Maven plugin:
 
@@ -33,7 +33,7 @@ This will speed up the compilation phase, and therefore the overall build time w
 
 This is intended as a dev mode, make sure to remove the flag before deploying to production to get the best performance.
 
-# Optimize performance
+# 2. Optimize performance
 
 ## PGO 🚀
 
@@ -96,7 +96,7 @@ There are several levels of optimizations in Native Image, that can be set at bu
 - `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
 
-# Testing 🧪
+# 3. Testing 🧪
 
 GraalVM's Native Build Tools support testing applications as native images, including JUnit support. The way this works is that your tests are compiled as native executables to verify that things work in the native world as expected. Test our application with the following:
 
@@ -106,7 +106,7 @@ In our example, `HttpRequestTest` will verify that the application returns the e
 
 Native testing recommendation: you don't need to test in the mode all the time, especially if you are working with frameworks and libraries that support Native Image – usually everything just works. Develop and test your application on the JVM, and test in Native once in a while, as a part of your CI/CD process, or if you are introducing a new dependency, or changing things that are sensitive for Native Image (reflection etc). 
 
-# Using libraries
+# 4. Using libraries
 
 When using libraries in native mode, some things such as reflection, resources, proxies might have to be made "visible" to Native Image at build time via configuration. Now the word "configuration" doesn't mean that this is something that you need to do manually as a user – let's look at all the many ways how this can just work.
 
@@ -124,7 +124,7 @@ runtimeHints.resources().registerPattern(“config/app.properties”); //registe
 * You can provide/extend config for reflection, JNI, resources, serialization, and predefined classes [manually in JSON](graalvm.org/latest/reference-manual/native-image/metadata/#specifying-metadata-with-json).
 
 
-# Configuring reflection, resources, proxies
+# 5. Configuring reflection, resources, proxies
 
 There is a way to automatically generate configuration files for Native Image. In our example, we have `ReflectionController`, which accesses a field in a different class at runtime, and `ResourceController`, which is reading `message.xml` at runtime. To make those calls visible and automatically resolved by Native Image, run the tracing agent:
 
@@ -141,13 +141,13 @@ http://localhost:8080/reflection
 http://localhost:8080/resource
 ```
 
-# Deploying 📦
+# 6. Deploying 📦
 
 ```
 mvn -Pnative spring-boot:build-image
 ```
 
-# Monitoring 📈
+# 7. Monitoring 📈
 
 Build an application with monitoring features enabled:
 
@@ -188,3 +188,14 @@ hey -n=100000 http://localhost:8080/hello
 </div>
 
 <p style="text-align: center;">Monitoring GraalVM native applications in VisualVM</p>
+
+# 8. Tips, tricks, and migration recommendations
+
+* Migrate 🚀
+    * Add Native Build Tools
+    * Alternatively, use recent versions of frameworks
+    * Evaluate libraries: graalvm.org/native-image/libraries-and-frameworks
+* Build and deploy 👷‍♀️
+    * Build and test on GraalVM as the JVM, build with Native  Image closer to the deployment
+    * While developing, use the build mode with `-Ob`
+    * Use CI/CD systems (e.g. GitHub actions) for deployment and cross-platform builds
