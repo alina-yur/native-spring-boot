@@ -96,12 +96,12 @@
               <groupId>org.graalvm.buildtools</groupId>
               <artifactId>native-maven-plugin</artifactId>
               <configuration>
-              <imageName>demo-optimized</imageName>
-              <buildArgs>
-			    <buildArg>--gc=G1</buildArg>
-                <buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
-				<buildArg>-march=native</buildArg>
-              </buildArgs>
+				<imageName>demo-optimized</imageName>
+				<buildArgs>
+					<buildArg>--gc=G1</buildArg>
+					<buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
+					<buildArg>-march=native</buildArg>
+				</buildArgs>
               </configuration>
             </plugin>
           </plugins>

@@ -152,7 +152,7 @@ mvn -Pnative spring-boot:build-image
 Build an application with monitoring features enabled:
 
 ```shell
-mvn -Pmonitored native:compile
+mvn -Pnative,monitored native:compile
 ```
 This will trigger a profile with the following `buildArgs`: `--enable-monitoring=heapdump,jfr,jvmstat`. You can also opt for using just one of those monitoring features. 
 
