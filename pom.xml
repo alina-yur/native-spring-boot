@@ -149,5 +149,24 @@
 				</plugins>
 			</build>
 		</profile>
+
+		<profile>
+			<id>sbom</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-sbom</imageName>
+							<buildArgs>
+								<buildArg>--enable-sbom=classpath</buildArg> <!-- not merged yet-->
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 	</profiles>
 </project>
