@@ -168,5 +168,23 @@
 			</build>
 		</profile>
 
+		<profile>
+			<id>size</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-size</imageName>
+							<buildArgs>
+								<buildArg>-Os</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 	</profiles>
 </project>
