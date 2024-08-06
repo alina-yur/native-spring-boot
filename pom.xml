@@ -188,7 +188,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>compacting-gc</imageName>
+							<imageName>demo-compacting-gc</imageName>
 							<buildArgs>
 								<buildArg>-H:+CompactingOldGen</buildArg>
 							</buildArgs>
