@@ -6,7 +6,7 @@ function print() {
 
 print "Starting the native app 🚀"
 
-./target/demo -Xmx512m &
+./target/demo-optimized -Xmx512m &
 export PID=$!
 psrecord $PID --plot "$(date +%s)-graalvm-native.png" --max-cpu 2200 --max-memory 900 --include-children &
 
