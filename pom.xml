@@ -41,9 +41,6 @@
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
 				<configuration>
-					<buildArgs>
-						<buildArg>-H:ConfigurationFileDirectories=./resources/META-INF/native-image</buildArg>
-					</buildArgs>
 				</configuration>
 			</plugin>
 			<plugin>
