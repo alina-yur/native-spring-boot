@@ -154,7 +154,8 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=classpath</buildArg> <!-- not merged yet-->
+								<buildArg>--enable-sbom=embed</buildArg> <!-- -
+								-enable-sbom=classpath for a classpath sbom-->
 							</buildArgs>
 						</configuration>
 					</plugin>
