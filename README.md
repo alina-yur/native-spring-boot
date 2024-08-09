@@ -183,7 +183,16 @@ Some of those steps look rather scary, but if you are starting a new project, mo
 mvn -Pnative spring-boot:build-image
 ```
 
-## 7. Monitoring 📈
+## 8. Security
+
+SBOM location:
+
+```shell
+http://localhost:8080/actuator/sbom
+```
+
+
+## 8. Monitoring 📈
 
 Build an application with monitoring features enabled:
 
@@ -225,7 +234,7 @@ hey -n=100000 http://localhost:8080/hello
 
 <p style="text-align: center;">Monitoring GraalVM native applications in VisualVM</p>
 
-## 8. Tips, tricks, and migration recommendations
+## 9. Tips, tricks, and migration recommendations
 
 * Migrate 🚀
     * Add Native Build Tools
