@@ -185,7 +185,19 @@ mvn -Pnative spring-boot:build-image
 
 ## 8. Security
 
-SBOM location:
+To build a native executable with an embedded SBOM, pass the following parameter to the build:
+
+```shell
+--enable-sbom
+```
+
+You can then explore it with tools like [syft](https://github.com/anchore/syft):
+
+```shell
+syft scan ./target/demo-sbom
+```
+
+SBOM location in Spring Boot:
 
 ```shell
 http://localhost:8080/actuator/sbom
@@ -242,5 +254,5 @@ hey -n=100000 http://localhost:8080/hello
     * Evaluate libraries: graalvm.org/native-image/libraries-and-frameworks
 * Build and deploy 👷‍♀️
     * Build and test on GraalVM as the JVM, build with Native  Image closer to the deployment
-    * While developing, use the build mode with `-Ob`
+    * While developing, use the quick build mode with `-Ob`
     * Use CI/CD systems (e.g. GitHub actions) for deployment and cross-platform builds
