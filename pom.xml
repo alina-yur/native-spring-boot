@@ -136,7 +136,7 @@
 							<imageName>demo-report</imageName>
 							<buildArgs>
 								<buildArg>--pgo</buildArg>
-								<buildArg>--emit build-report</buildArg>
+								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -154,8 +154,10 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=embed</buildArg> <!-- -
-								-enable-sbom=classpath for a classpath sbom-->
+								<buildArg>--enable-sbom=classpath</buildArg> <!-- -
+								-enable-sbom=embed
+								for embedded sbom,-
+								-enable-sbom=classpath for a classpath sbom, -->
 							</buildArgs>
 						</configuration>
 					</plugin>
