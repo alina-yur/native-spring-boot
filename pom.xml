@@ -154,10 +154,8 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=classpath</buildArg> <!-- -
-								-enable-sbom=embed
-								for embedded sbom,-
-								-enable-sbom=classpath for a classpath sbom, -->
+								<buildArg>--enable-sbom=classpath,embed</buildArg> <!-- use `embed`
+								for embedded sbom,`classpath` for a classpath sbom -->
 								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
 						</configuration>
