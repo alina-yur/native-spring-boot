@@ -179,6 +179,8 @@ Some of those steps look rather scary, but if you are starting a new project, mo
 
 ## 6. Deploying 📦
 
+Build a Docker Image via Buildpacks:
+
 ```
 mvn -Pnative spring-boot:build-image
 ```
