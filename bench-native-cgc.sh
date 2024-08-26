@@ -10,7 +10,7 @@ print "Starting the native app 🚀"
 export PID=$!
 psrecord $PID --plot "$(date +%s)-graalvm-native.png" --max-cpu 2200 --max-memory 900 --include-children &
 
-sleep 2
+sleep 4
 print "Done waiting for startup..."
 
 print "Executing warmup load"

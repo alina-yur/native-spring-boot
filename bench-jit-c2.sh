@@ -10,7 +10,7 @@ java -XX:-UseJVMCICompiler -Xmx512m -jar ./target/demo-0.0.1-SNAPSHOT.jar &
 export PID=$!
 psrecord $PID --plot "$(date +%s)-jit-c2.png" --max-cpu 2200 --max-memory 900 --include-children &
 
-sleep 2
+sleep 4
 print "Done waiting for startup..."
 
 print "Executing warmup load"
