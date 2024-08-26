@@ -1,5 +1,7 @@
 name: GraalVM Native Image builds
-on: [push, pull_request]
+on:
+  schedule:
+    - cron: '00 10 * * MON'  # At 10:00 Monday
 jobs:
   build:
     name: Spring Native on ${{ matrix.os }}
