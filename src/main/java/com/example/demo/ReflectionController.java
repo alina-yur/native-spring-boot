@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import org.springframework.aot.hint.annotation.RegisterReflectionForBinding;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ public class ReflectionController {
         return getMessage();
     }
 
+    @RegisterReflectionForBinding(Message.class)
     private String getMessage() {
         try {
             String className = Arrays.asList("com", "example", "demo", "Message").stream()
