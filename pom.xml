@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.0-M1</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
+		<!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>demo</artifactId>
@@ -15,7 +15,7 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>21</java.version>
+		<java.version>23</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,7 +42,7 @@
 				<artifactId>native-maven-plugin</artifactId>
 				<configuration>
 					<buildArgs>
-					<buildArg>-Ob</buildArg>
+						<buildArg>-Ob</buildArg>
 					</buildArgs>
 				</configuration>
 			</plugin>
@@ -51,13 +51,13 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<image>
-					  <builder>paketobuildpacks/builder-jammy-buildpackless-tiny</builder>
-					  <buildpacks>
-						<buildpack>paketobuildpacks/oracle</buildpack>
-						<buildpack>paketobuildpacks/java-native-image</buildpack>
-					  </buildpacks>
+						<builder>paketobuildpacks/builder-jammy-buildpackless-tiny</builder>
+						<buildpacks>
+							<buildpack>paketobuildpacks/oracle</buildpack>
+							<buildpack>paketobuildpacks/java-native-image</buildpack>
+						</buildpacks>
 					</image>
-				  </configuration>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -138,7 +138,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>report</id>
+			<id>full-report</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -149,6 +149,7 @@
 							<buildArgs>
 								<buildArg>--pgo</buildArg>
 								<buildArg>--emit=build-report</buildArg>
+								<buildArg>--enable-sbom=classpath,embed</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -166,7 +167,7 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=classpath,embed</buildArg> <!-- use `embed`
+								<buildArg>--enable-sbom=classpath,embed</buildArg>								<!-- use `embed`
 								for embedded sbom,`classpath` for a classpath sbom -->
 								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
