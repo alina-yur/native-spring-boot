@@ -1,4 +1,35 @@
-# 1. Spring AOT: Spring meets GraalVM 🤝
+# Native Spring Boot 🍃🐰
+
+## What is GraalVM and why GraalVM?
+
+GraalVM is a JDK, like the other JDKs you might know, but with unique features and capabilities.
+
+One such feature is the **Graal JIT compiler**. It's a highly optimizing compiler, which is the outcome of over a decade of research at Oracle Labs. By moving to the GraalVM JIT (by just setting GraalVM as your Java runtime), you can potentially win an extra 10-15% performance improvement. Not every application is performance-critical, but for those that are, every percent of performance improvement — especially with easy migration and no manual tuning required—is a huge win. This improvement is confirmed by both large-scale organizations, such as Oracle NetSuite, using GraalVM JIT in production at scale, and community reports, such the one from Ionut Balosin and Florin Blanaru (https://ionutbalosin.com/2024/02/jvm-performance-comparison-for-jdk-21/), where the Oracle GraalVM JIT shows performance improvement of 23% on x86_64 and 17% on arm64 compared to the C2 JIT compiler.
+
+Another feature that GraalVM adds to the JDK is the ability to **Embed other languages** in your Java application. We are lucky to have the incredibly rich Java ecosystem at our fingertips—whenever we have a problem that needs solving, there's always a Java library or tool for that. But sometimes we need to reach out for one specific library from another ecosystem, such as all the cool ML libraries in Python, or utilize the scripting capabilities of JavaScript. GraalVM, and more specifically its Truffle component, enables you to do just that: embedding what we call “guest language code” in your Java application. You use what you need to use, and GraalVM will take care of the rest: interoperability, performance, tooling, and security. By using GraalVM, you can combine the rich and powerful Java platform with any other library or tool that you like—how cool is that?
+
+Last, but not least, is GraalVM's **Native Image**, which enables you to compile your application ahead of time into a small and fast native executable. This is our main topic for today—so let's dive in.
+
+
+## Meet GraalVM Native Image
+
+So what is Native Image and how does it work exactly? Native Image is a feature in GraalVM that employs the Graal compiler to compile your application ahead of time into a native executable. The main reason you might want to do this,  is to shift the majority of the work that the JVM normally performs at run time, such as loading classes, profiling, and compilation, to build time,removing that overhead when you run your application. In addition to ahead-of-time (AOT) compilation, Native Image performs another important task: it takes a snapshot of your heap with objects that are safe to initialize at build time, to also reduce the allocation overhead.
+
+Native Image compiles your application into a native executable with the following advantages:
+
+
+Native Image compiles your Java application into a native executable with the following advantages:
+
+* Fast startup and instant peak performance, as the native executable doesn't need to warm up;
+* Low memory footprint, as no memory is used to profile and compile code at runtime;
+* Throughput on par with the JVM;
+* Compact packaging by including only reachable code;
+* Additional security, by eliminating unused code and reducing the attack surface.
+
+Now, let's take it for a spin!🏎️
+
+
+## 1. Spring AOT: Spring meets GraalVM 🤝
 
 Spring Boot 3.0 introduced the general availability of GraalVM Native Image in Spring projects, and here is how it works.
 
