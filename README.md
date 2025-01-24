@@ -289,3 +289,10 @@ hey -n=100000 http://localhost:8080/hello
     * Build and test on GraalVM as the JVM, build with Native  Image closer to the deployment
     * While developing, use the quick build mode with `-Ob`
     * Use CI/CD systems (e.g. GitHub actions) for deployment and cross-platform builds
+ * Monitor 📈
+    * jvmstat, JFR, JMX, Micrometer, cloud vendor solutions
+* Run faster 🚀
+    * PGO
+    * ML-enabled PGO
+    * G1 GC
+    * `-march=native`
