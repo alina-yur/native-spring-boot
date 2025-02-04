@@ -179,11 +179,34 @@ Some of those steps look rather scary, but if you are starting a new project, mo
 
 ## 6. Deploying 📦
 
-Build a Docker Image via Buildpacks:
+Build a Docker image via Buildpacks:
 
 ```
 mvn -Pnative spring-boot:build-image
 ```
+
+Alternatively, build a docker image yourself via included Dockerfile:
+
+Build:
+
+```shell
+docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot:latest .
+```
+
+Verify:
+
+```shell
+docker images
+REPOSITORY                                          TAG         IMAGE ID      CREATED             SIZE
+localhost/native-spring-boot                        latest      e664158e03d0  About a minute ago  209 MB
+```
+
+Run:
+
+```shell
+docker run -p 8080:8080 native-spring-boot:latest
+```
+
 
 ## 8. Security
 
