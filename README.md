@@ -238,6 +238,22 @@ Run:
 docker run -p 8080:8080 native-spring-boot:latest
 ```
 
+Alternatively yet again, if you are on Linux, you can just build a native executable locally and put it into an empty container:
+
+```shell
+docker build -f Dockerfiles/Dockerfile.native.static.local --build-arg APP_FILE=demo-static -t native-spring-boot-static-scratch:latest .
+docker run -p 8080:8080 native-spring-boot-static-scratch:latest
+```
+
+How linking and choice of the base image affect the image size:
+
+```shell
+docker images | grep "native-spring-boot"                                   
+localhost/native-spring-boot                        latest     ...  ...  210 MB
+localhost/native-spring-boot-static-scratch         latest     ...  ...  89.3 MB
+```
+
+
 
 ## 8. Security
 
