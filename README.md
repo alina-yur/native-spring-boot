@@ -318,6 +318,20 @@ hey -n=100000 http://localhost:8080/hello
 
 <p style="text-align: center;">Monitoring GraalVM native applications in VisualVM</p>
 
+## In the lab 👩‍🔬
+
+Profile your application with `perf`:
+
+```shell
+ perf record -e cycles -g ./target/demo
+ ```
+
+ Visualize the profiling information as a flamegraph:
+
+ ```shell
+ perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph.svg
+ ```
+
 ## 9. Tips, tricks, and migration recommendations
 
 * Migrate 🚀
