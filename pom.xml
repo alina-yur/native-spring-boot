@@ -190,16 +190,17 @@
 		</profile>
 
 		<profile>
-			<id>compacting-gc</id>
+			<id>static</id>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-compacting-gc</imageName>
+							<imageName>demo-static</imageName>
 							<buildArgs>
-								<buildArg>-H:+CompactingOldGen</buildArg>
+								<buildArg>--static</buildArg>
+								<buildArg>--libc=musl</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
