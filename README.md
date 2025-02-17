@@ -253,7 +253,17 @@ localhost/native-spring-boot                        latest     ...  ...  210 MB
 localhost/native-spring-boot-static-scratch         latest     ...  ...  89.3 MB
 ```
 
+How to build on the JDK:
 
+```shell
+docker build -f Dockerfiles/Dockerfile -t native-spring-boot-jdk:latest .
+```
+
+Run:
+
+```shell
+docker run -p 8080:8080 native-spring-boot-jdk:latest
+```
 
 ## 8. Security
 

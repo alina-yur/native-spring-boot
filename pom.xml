@@ -201,6 +201,7 @@
 							<buildArgs>
 								<buildArg>--static</buildArg>
 								<buildArg>--libc=musl</buildArg>
+								<buildArg>-Os</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
