@@ -238,11 +238,19 @@ Run:
 docker run -p 8080:8080 native-spring-boot:latest
 ```
 
+How to build a statically linked native image:
+
+```shell
+docker build -f Dockerfiles/Dockerfile.native.static --build-arg APP_FILE=demo-static -t native-spring-boot-static-scratch:latest .
+docker run -p 8080:8080 native-spring-boot-static-scratch:latest
+```
+
+
 Alternatively yet again, if you are on Linux, you can just build a native executable locally and put it into an empty container:
 
 ```shell
-docker build -f Dockerfiles/Dockerfile.native.static.local --build-arg APP_FILE=demo-static -t native-spring-boot-static-scratch:latest .
-docker run -p 8080:8080 native-spring-boot-static-scratch:latest
+docker build -f Dockerfiles/Dockerfile.native.static.local --build-arg APP_FILE=demo-static -t native-spring-boot-static-scratch-local:latest .
+docker run -p 8080:8080 native-spring-boot-static-scratch-local:latest
 ```
 
 How linking and choice of the base image affect the image size:
@@ -264,6 +272,11 @@ Run:
 ```shell
 docker run -p 8080:8080 native-spring-boot-jdk:latest
 ```
+
+<!-- + run syft on the containers -->
+
+<!-- still do mostly static -->
+
 
 ## 8. Security
 

@@ -1,3 +1,5 @@
+#build: docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot:latest .
+
 # Using Oracle GraalVM for JDK 23, OL8
 FROM container-registry.oracle.com/graalvm/native-image:23-ol8 AS builder
 
@@ -11,7 +13,7 @@ COPY . /build
 RUN ./mvnw --no-transfer-progress native:compile -Pnative
 
 # The deployment Image
-FROM container-registry.oracle.com/os/oraclelinux:8-slim
+FROM gcr.io/distroless/java-base-debian12
 
 EXPOSE 8080
 

@@ -201,6 +201,25 @@
 							<buildArgs>
 								<buildArg>--static</buildArg>
 								<buildArg>--libc=musl</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>static-size</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-static-size</imageName>
+							<buildArgs>
+								<buildArg>--static</buildArg>
+								<buildArg>--libc=musl</buildArg>
 								<buildArg>-Os</buildArg>
 							</buildArgs>
 						</configuration>
@@ -210,4 +229,5 @@
 		</profile>
 
 	</profiles>
+	
 </project>
