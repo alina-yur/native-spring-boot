@@ -1,0 +1,35 @@
+#build: docker build -f Dockerfiles/Dockerfile.jlink -t native-spring-boot-jdk-jlink:latest .
+
+# Using OpenJDK
+FROM openjdk:23-slim AS builder
+
+# Set the working directory to /home/app
+WORKDIR /build
+
+# Copy the source code into the image for building
+COPY . .
+
+# Build
+RUN ./mvnw package -DskipTests
+
+# Create minimal JDK
+RUN jlink \
+    --add-modules java.base,java.sql,java.naming,java.management,java.xml,java.logging,jdk.unsupported,java.desktop \
+    --no-man-pages \
+    --no-header-files \
+    --compress=2 \
+    --output /javaruntime
+
+# Use a slim base image for the final stage
+FROM gcr.io/distroless/java-base-debian12
+
+# Set up Java environment
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH "${JAVA_HOME}/bin:${PATH}"
+
+# Copy the minimal JDK and application
+COPY --from=builder /javaruntime $JAVA_HOME
+COPY --from=builder /build/target/demo-0.0.1-SNAPSHOT.jar app.jar
+
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]

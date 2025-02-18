@@ -1,5 +1,7 @@
+#build: docker build -f Dockerfiles/Dockerfile -t native-spring-boot-jdk:latest .
+
 # Using Oracle GraalVM for JDK 23
-FROM container-registry.oracle.com/graalvm/jdk:23
+FROM openjdk:23-slim
 
 # Set the working directory to /home/app
 WORKDIR /build
