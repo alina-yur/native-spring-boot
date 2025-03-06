@@ -273,7 +273,7 @@ Run:
 docker run -p 8080:8080 native-spring-boot-jdk:latest
 ```
 
-<!-- + run syft on the containers -->
+<!-- + run grype on the containers -->
 
 <!-- still do mostly static -->
 
