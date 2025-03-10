@@ -228,6 +228,24 @@
 			</build>
 		</profile>
 
+		<profile>
+			<id>nocr</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-nocr</imageName>
+							<buildArgs>
+								<buildArg>-H:-UseCompressedReferences</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
 	</profiles>
-	
+
 </project>
