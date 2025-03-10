@@ -168,6 +168,15 @@ There are several levels of optimizations in Native Image, that can be set at bu
 
 - `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
+## Bonus level: memory considerations
+
+A little lesser known fact: nn Oracle GraalVM, by default you benefit from compressed references to Java objects: they use 32 bit instead of 64 bit. It's enabled by default, so you just benefit from this optimization. If you are curious about the impact of this optimization, you can disable it for comparison with `-H:-UseCompressedReferences`. 
+
+For our `native-spring-boot` app, the impact is the following:
+
+* RSS of a base native executable, under high load: 234520 KB
+* RSS of a native executable without compressed references, under high load: 376828 KB
+
 
 ## 3. Testing 🧪
 
