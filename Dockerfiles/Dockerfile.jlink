@@ -1,6 +1,7 @@
-#build: docker build -f Dockerfiles/Dockerfile.jlink -t native-spring-boot-jdk-jlink:latest .
+#docker build -f Dockerfiles/Dockerfile.jlink -t native-spring-boot-jdk-jlink:latest .
+#docker run -p 8080:8080 native-spring-boot-jdk-jlink:latest
 
-# Using OpenJDK
+# Using OpenJDK (slim to reduce the final size)
 FROM openjdk:23-slim AS builder
 
 # Set the working directory to /home/app
@@ -14,7 +15,7 @@ RUN ./mvnw package -DskipTests
 
 # Create minimal JDK
 RUN jlink \
-    --add-modules java.base,java.sql,java.naming,java.management,java.xml,java.logging,jdk.unsupported,java.desktop \
+    --add-modules java.base,java.sql,java.naming,java.management,java.xml,java.security.jgss,java.instrument,java.logging,jdk.unsupported,java.desktop \
     --no-man-pages \
     --no-header-files \
     --compress=2 \

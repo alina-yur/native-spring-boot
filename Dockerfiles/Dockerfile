@@ -1,4 +1,5 @@
 #docker build -f Dockerfiles/Dockerfile -t native-spring-boot-jdk:latest .
+#docker run -p 8080:8080 localhost/native-spring-boot-jdk:latest
 
 # Build
 FROM eclipse-temurin:23 AS build
@@ -19,10 +20,10 @@ FROM eclipse-temurin:23
 WORKDIR /app
 
 # Copy the jar
-COPY --from=build /build/target/demo-0.0.1-SNAPSHOT.jar /app/demo-0.0.1-SNAPSHOT.jar
+COPY --from=build /build/target/demo-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Expose the application port
 EXPOSE 8080
 
 # Run
-CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]
