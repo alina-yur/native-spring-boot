@@ -1,4 +1,4 @@
-#build: docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot:latest .
+#build: docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot-native:latest .
 
 # Using Oracle GraalVM for JDK 23, OL8
 FROM container-registry.oracle.com/graalvm/native-image:23-ol8 AS builder

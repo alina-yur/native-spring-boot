@@ -12,7 +12,7 @@ COPY . .
 # Build the application
 RUN ./mvnw package -DskipTests
 
-# Run time stage
+# Run-time stage
 FROM eclipse-temurin:23
 
 # Set the working dir

@@ -230,7 +230,7 @@ Alternatively, build a docker image yourself via included Dockerfile:
 Build:
 
 ```shell
-docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot:latest .
+docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot:latest-native .
 ```
 
 Verify:
@@ -238,7 +238,7 @@ Verify:
 ```shell
 docker images
 REPOSITORY                                          TAG         IMAGE ID      CREATED             SIZE
-localhost/native-spring-boot                        latest      e664158e03d0  About a minute ago  209 MB
+localhost/native-spring-boot-native                 latest      e664158e03d0  About a minute ago  209 MB
 ```
 
 Run:
