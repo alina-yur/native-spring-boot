@@ -14,10 +14,11 @@ jobs:
 
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: '24-ea'
-          distribution: 'graalvm'
+          java-version: "24"
+          distribution: "graalvm"
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          native-image-job-reports: 'true'
+          native-image-job-reports: "true"
+          native-image-enable-sbom: "true"
 
       - name: Build and run a Spring Native app
         run: |
