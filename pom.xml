@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -164,8 +163,7 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=classpath,embed</buildArg>								<!-- use `embed`
-								for embedded sbom,`classpath` for a classpath sbom -->
+								<buildArg>--enable-sbom=classpath,embed</buildArg>
 								<buildArg>--pgo</buildArg>
 								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
@@ -225,24 +223,6 @@
 								<buildArg>--static</buildArg>
 								<buildArg>--libc=musl</buildArg>
 								<buildArg>-Os</buildArg>
-							</buildArgs>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>nocr</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.graalvm.buildtools</groupId>
-						<artifactId>native-maven-plugin</artifactId>
-						<configuration>
-							<imageName>demo-nocr</imageName>
-							<buildArgs>
-								<buildArg>-H:-UseCompressedReferences</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
