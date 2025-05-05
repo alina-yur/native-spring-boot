@@ -1,7 +1,8 @@
-#build: docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot-native:latest .
+# docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot-native:latest .
+# docker run -p 8080:8080 native-spring-boot-native:latest .
 
-# Using Oracle GraalVM for JDK 23, OL8
-FROM container-registry.oracle.com/graalvm/native-image:23-ol8 AS builder
+# Using Oracle GraalVM for JDK 24, OL8
+FROM container-registry.oracle.com/graalvm/native-image:24-ol8 AS builder
 
 # Set the working directory to /home/app
 WORKDIR /build
