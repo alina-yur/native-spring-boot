@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.5</version>
+		<version>3.4.6</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -16,8 +16,6 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>21</java.version>
-		 <spring-framework.version>6.2.7</spring-framework.version>
-		 <tomcat.version>10.1.41</tomcat.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -161,13 +159,10 @@
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
-						<version>0.10.6</version>
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
 								<buildArg>--enable-sbom=classpath,embed</buildArg>
-								<buildArg>--pgo</buildArg>
-								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
