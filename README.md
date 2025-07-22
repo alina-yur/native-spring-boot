@@ -367,9 +367,10 @@ Profile your application with `perf`:
 ## 9. Tips, tricks, and migration recommendations
 
 * Migrate 🚀
-    * Add Native Build Tools
+    * Add [Native Build Tools]|(https://graalvm.github.io/native-build-tools/latest/index.html)
     * Alternatively, use recent versions of frameworks
     * Evaluate libraries: graalvm.org/native-image/libraries-and-frameworks
+    * Get library config from [GraalVM Reachability Metadata Repository](https://github.com/oracle/graalvm-reachability-metadata) (always on when you use Native Build Tools)
 * Build and deploy 👷‍♀️
     * Build and test on GraalVM as the JVM, build with Native  Image closer to the deployment
     * While developing, use the quick build mode with `-Ob`
