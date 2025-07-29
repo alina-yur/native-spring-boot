@@ -226,6 +226,23 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>obfuscated</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-obfuscated</imageName>
+							<buildArgs>
+								<buildArg>-H:EnableObfuscation=""</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
 	</profiles>
 
