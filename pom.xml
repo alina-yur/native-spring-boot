@@ -227,6 +227,23 @@
 			</build>
 		</profile>
 		<profile>
+			<id>preserve</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-preserve</imageName>
+							<buildArgs>
+								<buildArg>-H:Preserve=all</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>obfuscated</id>
 			<build>
 				<plugins>
@@ -236,7 +253,8 @@
 						<configuration>
 							<imageName>demo-obfuscated</imageName>
 							<buildArgs>
-								<buildArg>-H:EnableObfuscation=""</buildArg>
+								<buildArg>-H:AdvancedObfuscation=export-mapping</buildArg>
+								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
