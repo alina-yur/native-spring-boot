@@ -10,5 +10,10 @@ public class HelloController {
     public String hello() {
         return "Hello from GraalVM and Spring!💃";
     }
-    
+
+    @GetMapping("/error1")
+    public String throwError() {
+        throw new RuntimeException("Something went wrong!");
+    }
+
 }

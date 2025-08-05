@@ -128,6 +128,12 @@ after you shut down the app, you'll see an `iprof` file in your working director
 
 ```mvn -Pnative,optimized native:compile```
 
+Measure max RSS on Mac:
+
+```
+/usr/bin/time -l ./target/demo
+````
+
 
 ### ML-enabled PGO 👩‍🔬
 
