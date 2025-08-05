@@ -261,6 +261,23 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>relative-pointers</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-relative-pointers</imageName>
+							<buildArgs>
+								<buildArg>-H:+RelativeCodePointers</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 
 	</profiles>
 
