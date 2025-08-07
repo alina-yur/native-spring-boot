@@ -217,6 +217,10 @@ And for resources:
 ```
 
 * Now if neither your library nor your framework support GraalVM, you can use the Tracing Agent that comes with Native Image to produce the necessary configuration [automatically](https://www.graalvm.org/latest/reference-manual/native-image/metadata/AutomaticMetadataCollection/).
+  * The syntax for working with the agent:
+    ```shell
+    java -agentlib:native-image-agent -jar ./target/demo.jar
+    ```
 * Finally, you can provide/extend configuration for reflection, JNI, resources, serialization, and predefined classes [manually in JSON](https://www.graalvm.org/latest/reference-manual/native-image/metadata/AutomaticMetadataCollection/).
 
 Some of those steps look rather scary, but if you are starting a new project, most of the frameworks and libraries will just work. The "Ready for Native Image" page mentioned above contains almost 200 libraries and frameworks, including Micronaut, Spring, Quarkus, Helidon, H2, GraphQL, MariaDB, Netty, MySQL, Neo4j, PostgreSQL, Testcontainers, Thymeleaf, and many others. There has never been a better time to be a Spring Boot and GraalVM developer!(c)
