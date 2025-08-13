@@ -162,7 +162,7 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=classpath,embed</buildArg>
+								<buildArg>--enable-sbom=classpath</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
