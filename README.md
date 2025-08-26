@@ -1,5 +1,7 @@
 # Native Spring Boot 🍃🐰
 
+[![GitHub Actions](https://github.com/alina-yur/native-spring-boot/actions/workflows/github-actions.yml/badge.svg)](https://github.com/alina-yur/native-spring-boot/actions) [![Known Vulnerabilities](https://snyk.io/test/github/alina-yur/native-spring-boot/badge.svg)](https://snyk.io/test/github/alina-yur/native-spring-boot)
+
 ## What is GraalVM and why GraalVM?
 
 GraalVM is a JDK, like the other JDKs you might know, but with unique features and capabilities.
