@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.6</version>
+		<version>3.5.5</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -162,7 +162,7 @@
 						<configuration>
 							<imageName>demo-sbom</imageName>
 							<buildArgs>
-								<buildArg>--enable-sbom=classpath</buildArg>
+								<buildArg>--enable-sbom=classpath,embed</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -237,6 +237,8 @@
 							<imageName>demo-preserve</imageName>
 							<buildArgs>
 								<buildArg>-H:Preserve=all</buildArg>
+								<buildArg>-H:IgnorePreserveForClasses=org.springframework.web.servlet.mvc.ServletWrappingController
+								</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -262,16 +264,36 @@
 			</build>
 		</profile>
 		<profile>
-			<id>relative-pointers</id>
+			<id>pie</id>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-relative-pointers</imageName>
+							<imageName>demo-pie</imageName>
 							<buildArgs>
+								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
+								<buildArg>--initialize-at-build-time=ch.qos.logback.classic.Logger,ch.qos.logback.classic.LoggerContext,ch.qos.logback.core.AppenderBase</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>pie-rcp</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>demo-pie-rcp</imageName>
+							<buildArgs>
+								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
 								<buildArg>-H:+RelativeCodePointers</buildArg>
+								<buildArg>--initialize-at-build-time=ch.qos.logback.classic.Logger,ch.qos.logback.classic.LoggerContext,ch.qos.logback.core.AppenderBase</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
