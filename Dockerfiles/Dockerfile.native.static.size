@@ -1,4 +1,5 @@
 # docker build -f Dockerfiles/Dockerfile.native.static.size -t native-spring-boot-static-size:latest .
+# docker run -p 8080:8080 native-spring-boot-static-size:latest 
 
 # Using Oracle GraalVM for JDK 25, OL8
 FROM container-registry.oracle.com/graalvm/native-image:25-muslib-ol8 AS builder
