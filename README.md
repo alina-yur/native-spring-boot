@@ -282,35 +282,37 @@ localhost/native-spring-boot                        latest     ...  ...  210 MB
 localhost/native-spring-boot-static-scratch         latest     ...  ...  89.3 MB
 ```
 
-How to build on the JDK:
+
+### You can significantly reduce the size by going with Native Image:
 
 ```shell
-docker build -f Dockerfiles/Dockerfile -t native-spring-boot-jdk:latest .
+➜ docker images | grep "native"                                                                
+localhost/native-spring-boot-static-size            latest         ... ...    58.5 MB
+localhost/native-spring-boot-static-scratch         latest         ... ...    84.4 MB
+localhost/native-spring-boot-native                 latest         ... ...    125 MB
+localhost/native-spring-boot-jdk-jlink              latest         ... ...    126 MB
+localhost/native-spring-boot-jdk-distroless         latest         ... ...    218 MB
+localhost/native-spring-boot-jdk                    latest         ... ...    480 MB
 ```
-
-Run:
-
-```shell
-docker run -p 8080:8080 native-spring-boot-jdk:latest
-```
-
-<!-- + run grype on the containers -->
-
-<!-- still do mostly static -->
 
 
 ## 8. Security
 
-To build a native executable with an embedded SBOM, pass the following parameter to the build:
+GraalVM’s support for Software Bill of Materials in Native Image helps you build and run native images according to the industry standards of security and compliance. 
+Since GraalVM 25, SBOM is embedded by default in all applications built with Oracle GraalVM. Now you can easily track all dependencies to scan and patch your Native Image deployments.
+In case you need to disable SBOM generation, use the flag --enable-sbom=false.
+
+
+Scan native images with `grype`: 
 
 ```shell
---enable-sbom
+`native-image-inspect --sbom ./target/demo-sbom | grype -v`
 ```
 
-You can then explore it with tools like [syft](https://github.com/anchore/syft):
+Or extract the contents of SBOM locally:
 
 ```shell
-syft scan ./target/demo-sbom
+`native-image-inspect --sbom ./target/demo-sbom>output.json`
 ```
 
 SBOM location in Spring Boot:
