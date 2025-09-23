@@ -181,6 +181,7 @@
 							<imageName>demo-size</imageName>
 							<buildArgs>
 								<buildArg>-Os</buildArg>
+								<buildArg>-H:+MLCallCountProfileInference</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -220,6 +221,7 @@
 								<buildArg>--static</buildArg>
 								<buildArg>--libc=musl</buildArg>
 								<buildArg>-Os</buildArg>
+								<buildArg>-H:+MLCallCountProfileInference</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>

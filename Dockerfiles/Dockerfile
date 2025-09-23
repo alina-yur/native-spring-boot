@@ -1,8 +1,8 @@
-#docker build -f Dockerfiles/Dockerfile -t native-spring-boot-jdk:latest .
-#docker run -p 8080:8080 localhost/native-spring-boot-jdk:latest
+# docker build -f Dockerfiles/Dockerfile -t native-spring-boot-jdk:latest .
+# docker run -p 8080:8080 localhost/native-spring-boot-jdk:latest
 
 # Build
-FROM eclipse-temurin:23 AS build
+FROM eclipse-temurin:24 AS build
 
 # Set the working dir
 WORKDIR /build

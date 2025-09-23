@@ -1,8 +1,8 @@
-#docker build -f Dockerfiles/Dockerfile.jlink -t native-spring-boot-jdk-jlink:latest .
-#docker run -p 8080:8080 native-spring-boot-jdk-jlink:latest
+# docker build -f Dockerfiles/Dockerfile.jlink -t native-spring-boot-jdk-jlink:latest .
+# docker run -p 8080:8080 native-spring-boot-jdk-jlink:latest
 
 # Using OpenJDK (slim to reduce the final size)
-FROM openjdk:23-slim AS builder
+FROM openjdk:25-slim AS builder
 
 # Set the working directory to /home/app
 WORKDIR /build
