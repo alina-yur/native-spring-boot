@@ -258,7 +258,6 @@
 							<imageName>demo-obfuscated</imageName>
 							<buildArgs>
 								<buildArg>-H:AdvancedObfuscation=export-mapping</buildArg>
-								<buildArg>--emit=build-report</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
