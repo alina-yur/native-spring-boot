@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.5</version>
+		<version>3.5.6</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -275,7 +275,6 @@
 							<imageName>demo-pie</imageName>
 							<buildArgs>
 								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
-								<buildArg>--initialize-at-build-time=ch.qos.logback.classic.Logger,ch.qos.logback.classic.LoggerContext,ch.qos.logback.core.AppenderBase</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -294,7 +293,6 @@
 							<buildArgs>
 								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
 								<buildArg>-H:+RelativeCodePointers</buildArg>
-								<buildArg>--initialize-at-build-time=ch.qos.logback.classic.Logger,ch.qos.logback.classic.LoggerContext,ch.qos.logback.core.AppenderBase</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
