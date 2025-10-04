@@ -174,7 +174,7 @@ There are several levels of optimizations in Native Image, that can be set at bu
 
 - `-Os` - Optimize for image size;
 
-- `-pgo`: Using PGO will automatically trigger `-O3` for best performance.
+- `--pgo`: Using PGO will automatically trigger `-O3` for best performance.
 
 ## Bonus level: memory considerations
 
