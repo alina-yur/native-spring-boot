@@ -66,7 +66,7 @@ public class HelloController {
 Guess what — we would also need GraalVM. The easiest way to install it on Linux and macOS is with SDKMAN!. As I'm writing this article, the latest released version is GraalVM for JDK 22, but we can also be cool and get the early access builds of GraalVM for JDK 23:
 
 ```shell
-sdk install java 23.ea.9-graal
+sdk install java 25.0.1-graal
 ```
 
 
