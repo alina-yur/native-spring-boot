@@ -2,11 +2,10 @@ package com.example.demo;
 
 import org.junit.jupiter.api.Test;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,12 +15,15 @@ class HttpRequestTest {
 	@LocalServerPort
 	private int port;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
-
 	@Test
-	void greetingShouldReturnMessage() throws Exception {
-		assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/hello",
-				String.class)).contains("Hello from GraalVM and Spring!💃");
+	void greetingShouldReturnMessage() {
+		WebTestClient client = WebTestClient.bindToServer()
+				.baseUrl("http://localhost:" + port)
+				.build();
+
+		client.get().uri("/hello")
+				.exchange()
+				.expectStatus().isOk()
+				.expectBody(String.class).value(body -> assertThat(body).contains("Hello from GraalVM and Spring!💃"));
 	}
 }

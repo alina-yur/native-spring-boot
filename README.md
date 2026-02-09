@@ -41,6 +41,15 @@ By default Spring Boot works in a way that at runtime it pulls your project's by
 * Bytecode for things such as dynamic proxies
 * Runtime hints for dynamic Java features when necessary (reflection, resources, and so on).
 
+#### GraalVM 25 and Spring Boot 4 update
+
+With the latest versions, both the native compilation and startup performance are impressive:
+
+| Metric | Value |
+|--------|-------|
+| Native compilation time | 1m 3s |
+| Startup time | 0.046s |
+
 
 ## 2. Build a Native Spring Application
 
