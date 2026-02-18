@@ -43,3 +43,7 @@ build/
 ### Other ###
 sbom.json
 mvnw
+
+Benchmarking GC.md
+graalvm-25.1.0-dev+8.1
+bench-*.sh
