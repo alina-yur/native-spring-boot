@@ -53,7 +53,7 @@ With the latest versions, both the native compilation and startup performance ar
 
 ## 2. Build a Native Spring Application
 
-Let's go to Josh Long's second favorite place — start.spring.io — and generate our project. The settings I chose are Spring Boot 3.3.1, Java 22, Maven, and my dependencies are Spring Web and GraalVM Native Image. That's all. Let's download and unpack our project, and add a HelloController.java so we have something to work with:
+Let's go to Josh Long's second favorite place — start.spring.io — and generate our project. The settings I chose are Spring Boot 4.0.2, Java 25, Maven, and my dependencies are Spring Web and GraalVM Native Image. That's all. Let's download and unpack our project, and add a HelloController.java so we have something to work with:
 
 ```java
 package com.example.demo;
@@ -72,10 +72,10 @@ public class HelloController {
 }
 ```
 
-Guess what — we would also need GraalVM. The easiest way to install it on Linux and macOS is with SDKMAN!. As I'm writing this article, the latest released version is GraalVM for JDK 22, but we can also be cool and get the early access builds of GraalVM for JDK 23:
+Guess what — we would also need GraalVM. The easiest way to install it on Linux and macOS is with SDKMAN!. As I'm writing this article, the latest released version is GraalVM for JDK 25:
 
 ```shell
-sdk install java 25.0.1-graal
+sdk install java 25.0.2-graal
 ```
 
 
@@ -390,7 +390,7 @@ Profile your application with `perf`:
 ## 9. Tips, tricks, and migration recommendations
 
 * Migrate 🚀
-    * Add [Native Build Tools]|(https://graalvm.github.io/native-build-tools/latest/index.html)
+    * Add [Native Build Tools](https://graalvm.github.io/native-build-tools/latest/index.html)
     * Alternatively, use recent versions of frameworks
     * Evaluate libraries: graalvm.org/native-image/libraries-and-frameworks
     * Get library config from [GraalVM Reachability Metadata Repository](https://github.com/oracle/graalvm-reachability-metadata) (always on when you use Native Build Tools)
