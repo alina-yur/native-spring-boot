@@ -90,7 +90,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-instrumented</imageName>
+							<imageName>${artifactId}-instrumented</imageName>
 							<buildArgs>
 								<buildArg>--pgo-instrument</buildArg>
 							</buildArgs>
@@ -107,7 +107,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-optimized</imageName>
+							<imageName>${artifactId}-optimized</imageName>
 							<buildArgs>
 								<buildArg>--gc=G1</buildArg>
 								<buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
@@ -126,7 +126,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-monitored</imageName>
+							<imageName>${artifactId}-monitored</imageName>
 							<buildArgs>
 								<buildArg>--pgo=${project.basedir}/default.iprof</buildArg>
 								<buildArg>-march=native</buildArg>
@@ -145,7 +145,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-report</imageName>
+							<imageName>${artifactId}-report</imageName>
 							<buildArgs>
 								<buildArg>--pgo</buildArg>
 								<buildArg>--emit=build-report</buildArg>
@@ -165,7 +165,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-sbom</imageName>
+							<imageName>${artifactId}-sbom</imageName>
 							<buildArgs>
 								<buildArg>--enable-sbom=classpath,embed</buildArg>
 							</buildArgs>
@@ -183,7 +183,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-size</imageName>
+							<imageName>${artifactId}-size</imageName>
 							<buildArgs>
 								<buildArg>-Os</buildArg>
 								<buildArg>-H:+MLCallCountProfileInference</buildArg>
@@ -202,7 +202,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-static</imageName>
+							<imageName>${artifactId}-static</imageName>
 							<buildArgs>
 								<buildArg>--static</buildArg>
 								<buildArg>--libc=musl</buildArg>
@@ -221,7 +221,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-static-size</imageName>
+							<imageName>${artifactId}-static-size</imageName>
 							<buildArgs>
 								<buildArg>--static</buildArg>
 								<buildArg>--libc=musl</buildArg>
@@ -241,7 +241,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-preserve</imageName>
+							<imageName>${artifactId}-preserve</imageName>
 							<buildArgs>
 								<buildArg>-H:Preserve=all</buildArg>
 								<buildArg>-H:IgnorePreserveForClasses=org.springframework.web.servlet.mvc.ServletWrappingController
@@ -260,7 +260,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-obfuscated</imageName>
+							<imageName>${artifactId}-obfuscated</imageName>
 							<buildArgs>
 								<buildArg>-H:AdvancedObfuscation=export-mapping</buildArg>
 							</buildArgs>
@@ -277,7 +277,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-pie</imageName>
+							<imageName>${artifactId}-pie</imageName>
 							<buildArgs>
 								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
 							</buildArgs>
@@ -294,7 +294,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-pie-rcp</imageName>
+							<imageName>${artifactId}-pie-rcp</imageName>
 							<buildArgs>
 								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
 								<buildArg>-H:+RelativeCodePointers</buildArg>
@@ -313,7 +313,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-old</imageName>
+							<imageName>${artifactId}-old</imageName>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -328,7 +328,7 @@
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>demo-new</imageName>
+							<imageName>${artifactId}-new</imageName>
 							<buildArgs>
 								<buildArg>-H:+CompactingOldGen</buildArg>
 								<buildArg>-H:InitialCollectionPolicy=Adaptive2</buildArg>
