@@ -152,7 +152,7 @@ The PGO approach described above— where the profiles are collected during a tr
 
 However, there can be situations  when it’s not possible to collect profiles for example, because of your deployment process. In that case, it's still possible to get profiling information and optimize your app via machine-learning-enabled PGO. Native Image contains a pre-trained ML model that predicts the probabilities of control flow graph branches, which enables it to additionally optimize the app. This is again available in Oracle GraalVM: it activates automatically in the absence of user-provided profiles.
 
-If you are curious about the impact of this kind of optimization, you can disable it with `-H:-MLProfileInference`. In our measurements, this optimization provides ~6% runtime performance improvement, which is pretty cool for an optimization you automatically get out of the box.
+If you are curious about the impact of this kind of optimization, you can disable it with `-H:-MLProfileInference`. In our measurements, this optimization provides ~8%-10% runtime performance improvement, which is pretty cool for an optimization you automatically get out of the box.
 
 
 ### G1 GC 🧹
