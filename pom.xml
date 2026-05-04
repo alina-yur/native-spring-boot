@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.4</version>
+		<version>4.0.6</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -149,6 +149,28 @@
 							<buildArgs>
 								<buildArg>--pgo</buildArg>
 								<buildArg>--emit=build-report</buildArg>
+								<buildArg>-H:+ReportDynamicAccess</buildArg>
+								<buildArg>--enable-sbom=classpath,embed</buildArg>
+							</buildArgs>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>report-llm</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.graalvm.buildtools</groupId>
+						<artifactId>native-maven-plugin</artifactId>
+						<configuration>
+							<imageName>${project.artifactId}-report-llm</imageName>
+							<buildArgs>
+								<buildArg>--pgo</buildArg>
+								<buildArg>-H:BuildOutputJSONFile=report.json</buildArg>
+								<buildArg>-H:+ReportDynamicAccess</buildArg>
 								<buildArg>--enable-sbom=classpath,embed</buildArg>
 							</buildArgs>
 						</configuration>

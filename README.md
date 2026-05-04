@@ -47,13 +47,13 @@ With the latest versions, both the native compilation and startup performance ar
 
 | Metric | Value |
 |--------|-------|
-| Native compilation time | 1m 3s |
-| Startup time | 0.046s |
+| Native compilation time | 1m 9s |
+| Startup time | 0.049s |
 
 
 ## 2. Build a Native Spring Application
 
-Let's go to Josh Long's second favorite place — start.spring.io — and generate our project. The settings I chose are Spring Boot 4.0.2, Java 25, Maven, and my dependencies are Spring Web and GraalVM Native Image. That's all. Let's download and unpack our project, and add a HelloController.java so we have something to work with:
+Let's go to Josh Long's second favorite place — start.spring.io — and generate our project. The settings I chose are Spring Boot 4.0.6, Java 25, Maven, and my dependencies are Spring Web and GraalVM Native Image. That's all. Let's download and unpack our project, and add a HelloController.java so we have something to work with:
 
 ```java
 package com.example.demo;
@@ -75,7 +75,7 @@ public class HelloController {
 Guess what — we would also need GraalVM. The easiest way to install it on Linux and macOS is with SDKMAN!. As I'm writing this article, the latest released version is GraalVM for JDK 25:
 
 ```shell
-sdk install java 25.0.2-graal
+sdk install java 25.0.3-graal
 ```
 
 
@@ -104,13 +104,13 @@ Now let's run our application:
 ./target/demo
 ...
 Tomcat started on port 8080 (http) with context path '/'
-Started DemoApplication in 0.048 seconds (process running for 0.051)
+Started DemoApplication in 0.049 seconds (process running for 0.052)
 ```
 
 
-Navigating to `http://localhost:8080/hello` gives us the same message, only now our application is much faster—it started in 48 milliseconds!
+Navigating to `http://localhost:8080/hello` gives us the same message, only now our application is much faster—it started in 49 milliseconds!
 
-We can also quickly assess the runtime characteristics of our application. The size of our application is 62MB, and measuring the runtime memory usage (RSS) while serving incoming requests gives us 69 MB. How great is this!
+We can also quickly assess the runtime characteristics of our application. The size of our application is 81 MB, and measuring the runtime memory usage (RSS) while serving incoming requests gives us 78 MB. How great is this!
 
 But let's explore performance more, and for that let's talk about specific performance optimizations in Native Image.
 
@@ -187,7 +187,7 @@ There are several levels of optimizations in Native Image, that can be set at bu
 
 ## Bonus level: memory considerations
 
-A little lesser known fact: nn Oracle GraalVM, by default you benefit from compressed references to Java objects: they use 32 bit instead of 64 bit. It's enabled by default, so you just benefit from this optimization. If you are curious about the impact of this optimization, you can disable it for comparison with `-H:-UseCompressedReferences`. 
+A little lesser known fact: in Oracle GraalVM, by default you benefit from compressed references to Java objects: they use 32 bit instead of 64 bit. It's enabled by default, so you just benefit from this optimization. If you are curious about the impact of this optimization, you can disable it for comparison with `-H:-UseCompressedReferences`. 
 
 For our `native-spring-boot` app, the impact is the following:
 
@@ -207,13 +207,13 @@ Native testing recommendation: you don't need to test in the mode all the time, 
 
 ## 4. Using Dynamic Java Features and Libraries
 
-Native Image compiles your applications ahead of time at build time. Since we needs a complete picture of your application, it compiles under a closed-world assumption: everything there is to know about your app, needs to be known at build time. Native Image's static analysis will try to make the best possible predictions about the runtime behavior of your application, but for those cases where it's not sufficient, you might need to provide it with configuration files to make things such as reflection, resources, JNI, serialization, and proxies "visible" to Native Image. Note the word "configuration" doesn't mean that this is something that you need to do manually—let's look at all the many ways this can work.
+Native Image compiles your applications ahead of time at build time. Since it needs a complete picture of your application, it compiles under a closed-world assumption: everything there is to know about your app, needs to be known at build time. Native Image's static analysis will try to make the best possible predictions about the runtime behavior of your application, but for those cases where it's not sufficient, you might need to provide it with configuration files to make things such as reflection, resources, JNI, serialization, and proxies "visible" to Native Image. Note the word "configuration" doesn't mean that this is something that you need to do manually—let's look at all the many ways this can work.
 
 * A library might be designed to be Native-Image friendly [out of the box](twitter.com/YunaMorgenstern/status/1729039787351536084) — this is obviously the ideal scenario. 
 * Existing libraries could need additional configuration to make things such as reflection work. Ideally, this configuration will be included within the library itself — for example [H2](https://github.com/h2database/h2database/blob/master/h2/src/main/META-INF/native-image/reflect-config.json). In this case no further action needed from a user – things just work.
 * In cases when a library doesn't (yet) support GraalVM, the next best option is having configuration for it in the [GraalVM Reachability Metadata Repository](https://github.com/oracle/graalvm-reachability-metadata). It's a centralized repository where both maintainers and users can contribute and then reuse configuration for Native Image. It's integrated into [Native Build Tools](https://github.com/graalvm/native-build-tools) (Maven and Gradle plugins) and now enabled and pulled by default, so as a user, again — things just work.
 For both of those options, a quick way to assess whether your dependencies work with Native Image is the Ready for Native Image page. Note that this is a list of libraries that are known to be continuously testing with Native Image, and there are more compatible libraries out there; but this is a good first step for assessment.
-* If your library of interest doesn't provide any support for GraalVM, but you are using a framework version that has Native Image support, such in our case Spring Boot 3.0, you can use the framework support to produce custom “hints” for Native Image:
+* If your library of interest doesn't provide any support for GraalVM, but you are using a framework version that has Native Image support, such as Spring Boot 4 in our case, you can use the framework support to produce custom “hints” for Native Image:
 
 ```java
 @RegisterReflectionForBinding(Clazz.class) // will register the annotated element for reflection
