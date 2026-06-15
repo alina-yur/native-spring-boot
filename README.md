@@ -315,13 +315,13 @@ In case you need to disable SBOM generation, use the flag --enable-sbom=false.
 Scan native images with `grype`: 
 
 ```shell
-`native-image-inspect --sbom ./target/demo-sbom | grype -v`
+native-image-utils extract-sbom --image-path=./target/demo-sbom | grype -v
 ```
 
 Or extract the contents of SBOM locally:
 
 ```shell
-`native-image-inspect --sbom ./target/demo-sbom>output.json`
+native-image-utils extract-sbom --image-path=./target/demo-sbom > output.json
 ```
 
 SBOM location in Spring Boot:
