@@ -1,8 +1,8 @@
 # docker build -f Dockerfiles/Dockerfile.native.static.size -t native-spring-boot-static-size:latest .
 # docker run -p 8080:8080 native-spring-boot-static-size:latest 
 
-# Using Oracle GraalVM for JDK 25, OL8
-FROM container-registry.oracle.com/graalvm/native-image:25-muslib-ol8 AS builder
+# Using Oracle GraalVM 25.2 with musl
+FROM container-registry.oracle.com/graalvm/native-image:25i2-muslib AS builder
 
 # Set the working directory to /home/app
 WORKDIR /build
@@ -13,8 +13,8 @@ COPY . /build
 # Build
 RUN ./mvnw --no-transfer-progress native:compile -Pnative,static-size
 
-# The deployment Image
-FROM gcr.io/distroless/static-debian12
+# A fully static executable can run in an empty image
+FROM scratch
 
 EXPOSE 8080
 

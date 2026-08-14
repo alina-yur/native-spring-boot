@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.0.6</version>
+		<version>4.1.0</version>
 		<relativePath />
 		<!-- lookup parent from repository -->
 	</parent>
@@ -15,8 +15,8 @@
 	<name>demo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>21</java.version>
-		<tomcat.version>11.0.22</tomcat.version>
+		<java.version>25</java.version>
+		<native-build-tools.version>1.1.8</native-build-tools.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -28,7 +28,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -46,6 +45,7 @@
 			<plugin>
 				<groupId>org.graalvm.buildtools</groupId>
 				<artifactId>native-maven-plugin</artifactId>
+				<version>${native-build-tools.version}</version>
 			</plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -62,26 +62,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
-	<pluginRepositories>
-		<pluginRepository>
-			<id>spring-milestones</id>
-			<name>Spring Milestones</name>
-			<url>https://repo.spring.io/milestone</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
 	<profiles>
 		<profile>
 			<id>instrumented</id>
@@ -150,27 +130,6 @@
 							<buildArgs>
 								<buildArg>--pgo</buildArg>
 								<buildArg>--emit=build-report</buildArg>
-								<buildArg>-H:+ReportDynamicAccess</buildArg>
-								<buildArg>--enable-sbom=classpath,embed</buildArg>
-							</buildArgs>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-
-		<profile>
-			<id>report-llm</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.graalvm.buildtools</groupId>
-						<artifactId>native-maven-plugin</artifactId>
-						<configuration>
-							<imageName>${project.artifactId}-report-llm</imageName>
-							<buildArgs>
-								<buildArg>--pgo</buildArg>
-								<buildArg>-H:BuildOutputJSONFile=report.json</buildArg>
 								<buildArg>-H:+ReportDynamicAccess</buildArg>
 								<buildArg>--enable-sbom=classpath,embed</buildArg>
 							</buildArgs>
@@ -266,9 +225,11 @@
 						<configuration>
 							<imageName>${project.artifactId}-preserve</imageName>
 							<buildArgs>
+								<buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
 								<buildArg>-H:Preserve=all</buildArg>
 								<buildArg>-H:IgnorePreserveForClasses=org.springframework.web.servlet.mvc.ServletWrappingController
 								</buildArg>
+								<buildArg>-H:-UnlockExperimentalVMOptions</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -285,7 +246,9 @@
 						<configuration>
 							<imageName>${project.artifactId}-obfuscated</imageName>
 							<buildArgs>
+								<buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
 								<buildArg>-H:AdvancedObfuscation=export-mapping</buildArg>
+								<buildArg>-H:-UnlockExperimentalVMOptions</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -320,7 +283,9 @@
 							<imageName>${project.artifactId}-pie-rcp</imageName>
 							<buildArgs>
 								<buildArg>-H:NativeLinkerOption=-pie</buildArg>
+								<buildArg>-H:+UnlockExperimentalVMOptions</buildArg>
 								<buildArg>-H:+RelativeCodePointers</buildArg>
+								<buildArg>-H:-UnlockExperimentalVMOptions</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>
@@ -329,14 +294,17 @@
 		</profile>
 
 		<profile>
-			<id>old</id>
+			<id>future-defaults</id>
 			<build>
 				<plugins>
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>${project.artifactId}-old</imageName>
+							<imageName>${project.artifactId}-future-defaults</imageName>
+							<buildArgs>
+								<buildArg>--future-defaults=all</buildArg>
+							</buildArgs>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -344,17 +312,55 @@
 		</profile>
 
 		<profile>
-			<id>new</id>
+			<id>crema</id>
+			<dependencies>
+				<dependency>
+					<groupId>net.bytebuddy</groupId>
+					<artifactId>byte-buddy</artifactId>
+				</dependency>
+			</dependencies>
 			<build>
 				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>build-helper-maven-plugin</artifactId>
+						<version>3.6.1</version>
+						<executions>
+							<execution>
+								<id>add-crema-source</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>add-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/crema/java</source>
+									</sources>
+								</configuration>
+							</execution>
+							<execution>
+								<id>add-crema-test-source</id>
+								<phase>generate-test-sources</phase>
+								<goals>
+									<goal>add-test-source</goal>
+								</goals>
+								<configuration>
+									<sources>
+										<source>src/crema-test/java</source>
+									</sources>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
 					<plugin>
 						<groupId>org.graalvm.buildtools</groupId>
 						<artifactId>native-maven-plugin</artifactId>
 						<configuration>
-							<imageName>${project.artifactId}-new</imageName>
+							<imageName>${project.artifactId}-crema</imageName>
 							<buildArgs>
-								<buildArg>-H:+CompactingOldGen</buildArg>
-								<buildArg>-H:InitialCollectionPolicy=Adaptive2</buildArg>
+								<buildArg>-Ob</buildArg>
+								<buildArg>--initialize-at-build-time=net.bytebuddy</buildArg>
+								<buildArg>-H:+RuntimeClassLoading</buildArg>
 							</buildArgs>
 						</configuration>
 					</plugin>

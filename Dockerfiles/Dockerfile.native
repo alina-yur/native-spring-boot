@@ -1,8 +1,8 @@
 # docker build -f Dockerfiles/Dockerfile.native -t native-spring-boot-native:latest .
 # docker run -p 8080:8080 native-spring-boot-native:latest .
 
-# Using Oracle GraalVM 25, OL8
-FROM container-registry.oracle.com/graalvm/native-image:25-ol8 AS builder
+# Using Oracle GraalVM 25.2
+FROM container-registry.oracle.com/graalvm/native-image:25i2 AS builder
 
 # Set the working directory to /home/app
 WORKDIR /build
@@ -13,11 +13,11 @@ COPY . /build
 # Build
 RUN ./mvnw --no-transfer-progress native:compile -Pnative
 
-# The deployment Image
-FROM gcr.io/distroless/java-base-debian12
+# The native executable needs a libc base, not a JVM runtime
+FROM gcr.io/distroless/base-debian12:nonroot
 
 EXPOSE 8080
 
 # Copy the native executable into the containers
-COPY --from=builder /build/target/demo app
+COPY --from=builder --chown=nonroot:nonroot /build/target/demo app
 ENTRYPOINT ["/app"]

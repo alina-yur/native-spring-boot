@@ -2,9 +2,11 @@ name: GraalVM Native Image builds
 on: push
 #  schedule:
 #    - cron: '00 10 * * MON'  # At 10:00 Monday
+permissions:
+  contents: write
 jobs:
   build:
-    name: Spring Native on ${{ matrix.os }}
+    name: Spring Boot Native Image on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -14,15 +16,19 @@ jobs:
 
       - uses: graalvm/setup-graalvm@v1
         with:
-          java-version: "25"
+          version: "25.2"
           distribution: "graalvm"
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: "maven"
+          check-for-updates: "true"
           native-image-job-reports: "true"
           native-image-enable-sbom: "true"
 
-      - name: Build and run a Spring Native app
-        run: |
-          mvn --no-transfer-progress -Pnative native:compile
+      - name: Test on the JVM
+        run: mvn --no-transfer-progress test
+
+      - name: Build a native executable
+        run: mvn --no-transfer-progress -Pnative native:compile
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
